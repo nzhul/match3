@@ -19,6 +19,7 @@ public class Board : MonoBehaviour
 	Tile m_clickedTile;
 	Tile m_targetTile;
 
+	// adding some fake change. delete this in next commit
 	void Start()
 	{
 		m_allTiles = new Tile[width, height];
