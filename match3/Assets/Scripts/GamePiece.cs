@@ -1,6 +1,20 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+public enum MatchValue
+{
+	Yellow,
+	Blue,
+	Magenta,
+	Indigo,
+	Green,
+	Teal,
+	Red,
+	Cyan,
+	Wild,
+	None
+}
+
 public class GamePiece : MonoBehaviour
 {
 
@@ -23,19 +37,6 @@ public class GamePiece : MonoBehaviour
 	}
 
 	public MatchValue matchValue;
-
-	public enum MatchValue
-	{
-		Yellow,
-		Blue,
-		Magenta,
-		Indigo,
-		Green,
-		Teal,
-		Red,
-		Cyan,
-		Wild
-	}
 
 	public void SetCoord(int x, int y)
 	{
@@ -120,5 +121,22 @@ public class GamePiece : MonoBehaviour
 		}
 
 		m_isMoving = false;
+	}
+
+	public void ChangeColor(GamePiece pieceToMatch)
+	{
+		SpriteRenderer rendererToChange = GetComponent<SpriteRenderer>();
+		Color colorToMatch = Color.clear;
+
+		if (pieceToMatch != null)
+		{
+			SpriteRenderer rendererToMatch = pieceToMatch.GetComponent<SpriteRenderer>();
+			if (rendererToMatch != null && rendererToChange != null)
+			{
+				rendererToChange.color = rendererToMatch.color;
+			}
+		}
+
+		matchValue = pieceToMatch.matchValue;
 	}
 }
