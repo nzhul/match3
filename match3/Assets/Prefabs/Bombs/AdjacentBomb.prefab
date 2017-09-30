@@ -117,6 +117,7 @@ MonoBehaviour:
   yIndex: 0
   interpolation: 4
   matchValue: 8
+  scoreValue: 160
   bombType: 3
 --- !u!198 &198938826797287206
 ParticleSystem:

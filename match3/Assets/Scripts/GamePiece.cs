@@ -38,6 +38,8 @@ public class GamePiece : MonoBehaviour
 
 	public MatchValue matchValue;
 
+	public int scoreValue = 20;
+
 	public void SetCoord(int x, int y)
 	{
 		xIndex = x;
@@ -138,5 +140,13 @@ public class GamePiece : MonoBehaviour
 		}
 
 		matchValue = pieceToMatch.matchValue;
+	}
+
+	public void ScorePoints(int multiplier = 1, int bonus = 0)
+	{
+		if (ScoreManager.Instance != null)
+		{
+			ScoreManager.Instance.AddScore(scoreValue * multiplier + bonus);
+		}
 	}
 }
