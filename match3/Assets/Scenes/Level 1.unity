@@ -188,27 +188,7 @@ MonoBehaviour:
     x: 4
     y: 4
     z: 0
-  startingGamePieces:
-  - prefab: {fileID: 1224995825505876, guid: 77a875c0c33f9cb4099268ae75842af4, type: 2}
-    x: 4
-    y: 8
-    z: 0
-  - prefab: {fileID: 1461450772851416, guid: e94292d1bec72ed4ea90f525ff673bed, type: 2}
-    x: 4
-    y: 4
-    z: 0
-  - prefab: {fileID: 1461450772851416, guid: e94292d1bec72ed4ea90f525ff673bed, type: 2}
-    x: 4
-    y: 5
-    z: 0
-  - prefab: {fileID: 1129536014481070, guid: e8a2f123e2d9c474e9836c9772494866, type: 2}
-    x: 5
-    y: 6
-    z: 0
-  - prefab: {fileID: 1461450772851416, guid: e94292d1bec72ed4ea90f525ff673bed, type: 2}
-    x: 4
-    y: 7
-    z: 0
+  startingGamePieces: []
   fillYOffset: 10
   fillMoveTime: 0.5
 --- !u!4 &194864734
@@ -332,7 +312,7 @@ GameObject:
   - component: {fileID: 367395863}
   - component: {fileID: 367395862}
   m_Layer: 5
-  m_Name: Image
+  m_Name: MessageIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -877,7 +857,7 @@ GameObject:
   - component: {fileID: 979961354}
   - component: {fileID: 979961353}
   m_Layer: 5
-  m_Name: StartText
+  m_Name: ButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1198,6 +1178,7 @@ GameObject:
   - component: {fileID: 1173843742}
   - component: {fileID: 1173843744}
   - component: {fileID: 1173843745}
+  - component: {fileID: 1173843746}
   m_Layer: 5
   m_Name: MessageWindow
   m_TagString: Untagged
@@ -1283,10 +1264,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dc81ea121cd57d49b1344e6badf49ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosition: {x: 0, y: 0, z: 0}
+  startPosition: {x: 0, y: 1500, z: 0}
   onscreenPosition: {x: 0, y: 0, z: 0}
-  endPosition: {x: 0, y: 0, z: 0}
+  endPosition: {x: 0, y: -1500, z: 0}
   timeToMove: 1
+--- !u!114 &1173843746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1173843740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adfc362dffe0c904198d40c67850ffe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  messageIcon: {fileID: 367395862}
+  messageText: {fileID: 455179362}
+  buttonText: {fileID: 979961353}
 --- !u!1 &1217654392
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,6 +1384,7 @@ Transform:
   - {fileID: 702723745}
   - {fileID: 984221591}
   - {fileID: 1333242597}
+  - {fileID: 1821958501}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1432,11 +1428,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 612819a72fb50fb4c9f5f507eced6d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movesLeft: 3
-  scoreGoal: 10000
+  movesLeft: 15
+  scoreGoal: 2500
   screenFader: {fileID: 1841383301}
   levelNameText: {fileID: 723211653}
   movesLeftText: {fileID: 1003002627}
+  messageWindow: {fileID: 1173843746}
+  loseIcon: {fileID: 21300000, guid: 95f81682b86364542a4a2ced4bbc0454, type: 3}
+  winIcon: {fileID: 21300000, guid: 2e4e41d8986b29a4986572e411a75978, type: 3}
+  goalIcon: {fileID: 21300000, guid: 53c46d1ae999bab44bcd6a3666a5ed50, type: 3}
 --- !u!1 &1495663224
 GameObject:
   m_ObjectHideFlags: 0
@@ -1596,6 +1596,59 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1770657853}
+--- !u!1 &1821958500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1821958501}
+  - component: {fileID: 1821958502}
+  m_Layer: 0
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1821958501
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1821958500}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1265610319}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1821958502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1821958500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c120118ed34d9144fb5f7808b1baddb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicClips:
+  - {fileID: 8300000, guid: e75e89afb6e1648e7a4a2ac64328a7c0, type: 3}
+  - {fileID: 8300000, guid: e5e029a21fda14206a9ff1423a1302a9, type: 3}
+  winClips:
+  - {fileID: 8300000, guid: 5f9fb0bfcf06e4304aab13b97645fe13, type: 3}
+  loseClips:
+  - {fileID: 8300000, guid: ed4ad50d33af142e6be4b65f4d37e37c, type: 3}
+  bonusClips:
+  - {fileID: 8300000, guid: 56e813bd88354448fb9f0a52536449a1, type: 3}
+  - {fileID: 8300000, guid: eadcfb9a0c2cb4bea8112ac470640c8e, type: 3}
+  - {fileID: 8300000, guid: 6dce900c6b57748dbb2ee112588b2bd9, type: 3}
+  musicVolume: 0.5
+  fxVolume: 1
 --- !u!1 &1841383297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1787,7 +1840,7 @@ GameObject:
   - component: {fileID: 2019068610}
   - component: {fileID: 2019068609}
   m_Layer: 5
-  m_Name: StartButton
+  m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1850,7 +1903,40 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2019068610}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1333242598}
+        m_MethodName: BeginGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1173843745}
+        m_MethodName: MoveOff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1333242598}
+        m_MethodName: ReloadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2019068610

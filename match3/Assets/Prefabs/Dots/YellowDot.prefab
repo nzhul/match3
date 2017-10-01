@@ -55,6 +55,9 @@ MonoBehaviour:
   xIndex: 0
   yIndex: 0
   interpolation: 4
+  matchValue: 0
+  scoreValue: 20
+  clearSound: {fileID: 8300000, guid: 6dce900c6b57748dbb2ee112588b2bd9, type: 3}
 --- !u!212 &212048943040437742
 SpriteRenderer:
   m_ObjectHideFlags: 1

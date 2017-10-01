@@ -17,6 +17,12 @@ public class GameManager : Singleton<GameManager>
 	bool m_isReadyToBegin = false;
 	bool m_isGameOver = false;
 	bool m_isWinner = false;
+	bool m_isReadyToReload = false;
+
+	public MessageWindow messageWindow;
+	public Sprite loseIcon;
+	public Sprite winIcon;
+	public Sprite goalIcon;
 
 	private void Start()
 	{
@@ -47,13 +53,22 @@ public class GameManager : Singleton<GameManager>
 		yield return StartCoroutine("EndGameRoutine");
 	}
 
+	public void BeginGame()
+	{
+		m_isReadyToBegin = true;
+	}
+
 	IEnumerator StartGameRoutine()
 	{
+		if (messageWindow != null)
+		{
+			messageWindow.GetComponent<RectXformMover>().MoveOn();
+			messageWindow.ShowMessage(goalIcon, "score goal\n" + scoreGoal.ToString(), "start");
+		}
+
 		while (!m_isReadyToBegin)
 		{
 			yield return null;
-			//yield return new WaitForSeconds(2);
-			m_isReadyToBegin = true;
 		}
 
 		if (screenFader != null)
@@ -73,6 +88,15 @@ public class GameManager : Singleton<GameManager>
 	{
 		while(!m_isGameOver)
 		{
+			if (ScoreManager.Instance != null)
+			{
+				if (ScoreManager.Instance.CurrentScore >= scoreGoal)
+				{
+					m_isGameOver = true;
+					m_isWinner = true;
+				}
+			}
+
 			if (movesLeft == 0)
 			{
 				m_isGameOver = true;
@@ -85,22 +109,49 @@ public class GameManager : Singleton<GameManager>
 
 	IEnumerator EndGameRoutine()
 	{
+		m_isReadyToReload = false;
+
+		if (m_isWinner)
+		{
+			if (messageWindow != null)
+			{
+				messageWindow.GetComponent<RectXformMover>().MoveOn();
+				messageWindow.ShowMessage(winIcon, "YOU WIN!", "OK");
+			}
+
+			if (SoundManager.Instance != null)
+			{
+				SoundManager.Instance.PlayWinSound();
+			}
+		}
+		else
+		{
+			messageWindow.GetComponent<RectXformMover>().MoveOn();
+			messageWindow.ShowMessage(loseIcon, "YOU LOSE!", "OK");
+
+			if (SoundManager.Instance != null)
+			{
+				SoundManager.Instance.PlayLoseSound();
+			}
+		}
+
+		yield return new WaitForSeconds(1f);
+
 		if (screenFader != null)
 		{
 			screenFader.FadeOn();
 		}
 
-		if (m_isWinner)
+		while (!m_isReadyToReload)
 		{
-			Debug.Log("YOU WIN!");
-		}
-		else
-		{
-			Debug.Log("YOU LOSE!");
+			yield return null;
 		}
 
-		yield return null;
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 
-
+	public void ReloadScene()
+	{
+		m_isReadyToReload = true;
+	}
 }
